@@ -18,6 +18,7 @@
   <meta name="twitter:title" content="Krishna Prasad A | Java Backend Developer | Software Engineer" />
   <meta name="twitter:description" content="Java backend developer focused on scalable microservices, Spring Boot APIs, distributed systems, and platform reliability." />
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -40,9 +41,10 @@
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#stack">Tech Stack</a>
+        <a href="#blogs">Blogs</a>
         <a href="#contact">Contact</a>
       </nav>
-      <a class="resume-button" href="#contact">Resume</a>
+      <a class="resume-button" href="https://latexonline.cc/compile?url=https://raw.githubusercontent.com/me-krishnaprasad-dev/portfolio/main/resume.tex" target="_blank" rel="noopener">Resume</a>
     </header>
 
     <main>
@@ -156,6 +158,19 @@
           <p>J.P. Morgan Software Engineering Virtual Experience – Forage (Feb 2024)<br /><br />Led RITU-23 Web Team, managing project tasks and user interface design.<br />Write technical blogs and solve coding challenges on LeetCode.</p>
         </article>
       </section>
+
+      <section id="blogs" class="section-block">
+        <div class="section-heading">
+          <span class="section-label">Latest Blogs</span>
+        </div>
+        <div id="blog-list">
+          <ul id="file-list"></ul>
+        </div>
+        <div id="blog-content" class="blog-content">
+          <a href="#" id="back-btn" class="back-btn">← Back to Blog List</a>
+          <div id="content"></div>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer" id="contact">
@@ -169,5 +184,111 @@
       </div>
     </footer>
   </div>
+
+  <div id="blog-full-view" class="blog-full-view">
+    <a href="#" id="back-btn-full" class="back-btn">← Back to Portfolio</a>
+    <div id="content-full"></div>
+  </div>
+
+  <script>
+    const repo = 'me-krishnaprasad-dev/blogs';
+    const apiUrl = `https://api.github.com/repos/${repo}/contents/`;
+
+    const blogList = document.getElementById('blog-list');
+    const blogContent = document.getElementById('blog-content');
+    const fileList = document.getElementById('file-list');
+    const contentDiv = document.getElementById('content');
+    const backBtn = document.getElementById('back-btn');
+    const blogFullView = document.getElementById('blog-full-view');
+    const contentFull = document.getElementById('content-full');
+    const backBtnFull = document.getElementById('back-btn-full');
+
+    let mdFiles = [];
+
+    function loadBlogList() {
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Repository not found or empty');
+          }
+          return response.json();
+        })
+        .then(data => {
+          mdFiles = data.filter(item => item.type === 'file' && item.name.endsWith('.md'));
+          
+          if (mdFiles.length === 0) {
+            fileList.innerHTML = '<li>No blog posts found.</li>';
+          } else {
+            fileList.innerHTML = '';
+            mdFiles.forEach(file => {
+              const li = document.createElement('li');
+              li.textContent = file.name.replace('.md', '');
+              li.addEventListener('click', () => {
+                const postName = file.name.replace('.md', '');
+                window.location.hash = '#blogs/' + encodeURIComponent(postName);
+              });
+              fileList.appendChild(li);
+            });
+          }
+        })
+        .catch(error => {
+          fileList.innerHTML = '<li>Error loading blogs: ' + error.message + '</li>';
+        });
+    }
+
+    function showBlog(file, title) {
+      fetch(file.download_url)
+        .then(response => response.text())
+        .then(markdown => {
+          contentFull.innerHTML = `<h1>${title}</h1>` + marked.parse(markdown);
+          document.body.classList.add('blog-view');
+          blogFullView.classList.add('show');
+        })
+        .catch(error => {
+          contentFull.innerHTML = `<h1>${title}</h1><p>Error loading blog: ${error.message}</p>`;
+          document.body.classList.add('blog-view');
+          blogFullView.classList.add('show');
+        });
+    }
+
+    function showBlogList() {
+      document.body.classList.remove('blog-view');
+      blogFullView.classList.remove('show');
+    }
+
+    function handleHash() {
+      const hash = window.location.hash;
+      if (hash.startsWith('#blogs/')) {
+        const postName = decodeURIComponent(hash.slice(7));
+        const file = mdFiles.find(f => f.name.replace('.md', '') === postName);
+        if (file) {
+          showBlog(file, postName);
+        } else {
+          // Load list if not loaded
+          loadBlogList();
+          setTimeout(() => {
+            const file = mdFiles.find(f => f.name.replace('.md', '') === postName);
+            if (file) showBlog(file, postName);
+          }, 100);
+        }
+      } else if (hash === '#blogs' || hash === '') {
+        showBlogList();
+      }
+    }
+
+    backBtn.addEventListener('click', () => {
+      window.location.hash = '#blogs';
+    });
+
+    backBtnFull.addEventListener('click', () => {
+      window.location.hash = '#blogs';
+    });
+
+    window.addEventListener('hashchange', handleHash);
+    window.addEventListener('load', () => {
+      loadBlogList();
+      handleHash();
+    });
+  </script>
 </body>
 </html>

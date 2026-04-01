@@ -1,0 +1,161 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot,
+    top=1 cm,
+    bottom=1 cm,
+    left=1 cm,
+    right=1 cm,
+    footskip=1 cm,
+]{geometry}a
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{primaryColor}{RGB}{0, 0, 0}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{amsmath}
+\usepackage[
+    pdftitle={Krishna Prasad A},
+    pdfauthor={Krishna Prasad A},
+    pdfcreator={Krishna Prasad A},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref}
+\usepackage{changepage}
+\usepackage{iftex}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+\fi
+
+\raggedright
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+
+\titleformat{\section}{\needspace{\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+\titlespacing{\section}{-1pt}{0.3cm}{0.2cm}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
+
+\newenvironment{highlights}{
+\begin{itemize}[topsep=0.08cm,parsep=0.08cm,partopsep=0pt,itemsep=0pt,leftmargin=10pt]}{\end{itemize}}
+
+\newenvironment{onecolentry}{\begin{adjustwidth}{0cm}{0cm}}{\end{adjustwidth}}
+
+% ✅ Robust two-column entry environment (no @Xr@ text issue)
+\newcommand{\twocolentry}[2]{%
+  \noindent\begin{tabular*}{\textwidth}{@{}p{0.70\textwidth}@{\extracolsep{\fill}}r@{}}
+  #2 & \textit{#1} \\
+  \end{tabular*}\par
+}
+
+\newenvironment{header}{\centering\linespread{1.5}}{}
+
+\begin{document}
+
+\begin{header}
+    \fontsize{25 pt}{25 pt}\selectfont Krishna Prasad A
+
+    \vspace{ pt}
+    \fontsize{15 pt}{15 pt}\selectfont Java Backend Developer
+
+    \vspace{5 pt}
+    \normalsize
+    \href{mailto:a.krish.kp@gmail.com}{a.krish.kp@gmail.com} $|$ 9048580029 $|$
+    \href{https://www.linkedin.com/in/krishna-prasad-a-579261214/}{linkedin.com/in/krishna-prasad-a} $|$
+    \href{https://github.com/krishna-kpa}{github.com/krishna-kpa} $|$
+    \href{https://me.krishnaprasad.dev/}{me.krishnaprasad.dev}
+\end{header}
+
+\vspace{3pt}
+\section{Profile}
+Java Developer with 1.5 years of experience specializing in high-performance Spring Boot microservices and PostgreSQL. Led the development of a comprehensive authorization system, implementing flexible policy handling and diverse authorization models with a strong commitment to writing clean and efficient code.
+
+\section{Education}
+\twocolentry{2020 – 2024}{\textbf{B.Tech in CSE}, Rajiv Gandhi Institute of Technology (CGPA: 8.27)}
+\vspace{0.05cm}
+\begin{onecolentry}
+\begin{highlights}
+    \item \textbf{Relevant Coursework:} Data Structures, Algorithms, Operating Systems, DBMS
+\end{highlights}
+\end{onecolentry}
+
+\section{Experience}
+\twocolentry{July 2024 – Present}{\textbf{Associate Engineer - R\&D}, Litmus7 Systems Consulting Pvt Ltd -- Kochi, India}
+\vspace{0.05cm}
+\begin{onecolentry}
+\begin{highlights}
+    \item Working on a general-purpose authorization service for internal use, supporting \textbf{RBAC, ReBAC, ACL, and ABAC} models with flexible policy handling.
+    \item Developed REST APIs using Spring Boot following modular and testable design.
+    \item Created a custom \textbf{Maven plugin} to check code style, commit messages, and run local quality checks using SonarQube, helping reduce unnecessary CI runs.
+    \item \textbf{Developed} a custom \textbf{Utility} for schema inference across diverse data storage systems (GCS, MinIO, PostgreSQL, MySQL, MongoDB, and Cassandra).
+    \item \textbf{Mentored} freshers in learning Java and microservices basics through project discussions and code reviews.
+    \item \textbf{Reviewed and vetted} entry-level projects, verifying technical proficiency and suitability for live project assignments.
+    \item \textbf{Conducting internal sessions} to share technical topics and best practices with the team.
+\end{highlights}
+\end{onecolentry}
+
+\vspace{0.12cm}
+\twocolentry{Jan 2024 – June 2024}{\textbf{Project Intern}, Suntec Business Solutions Pvt. Ltd. -- Trivandrum, India}
+\vspace{0.05cm}
+\begin{onecolentry}
+\begin{highlights}
+    \item Helped in developing and testing REST APIs for the Xelerate platform.
+    \item Gained experience in Java, Spring Boot, and application testing processes.
+\end{highlights}
+\end{onecolentry}
+
+\section{Projects}
+\vspace{0.05cm}
+\textbf{E-Commerce Platform (In Progress)}
+\begin{onecolentry}
+\begin{highlights}
+    \item Designing a small-scale e-commerce system using microservices, with \textbf{Kafka} for event handling and \textbf{Redis} for caching.
+    \item \textbf{Tech Stack:} Spring Boot, Kafka, Redis, Docker, Kubernetes
+\end{highlights}
+\end{onecolentry}
+\vspace{0.10cm}
+\textbf{Task Tracker CLI} -- \href{https://github.com/krishna-kpa/task-tracker}{github.com/krishna-kpa/task-tracker}
+\begin{onecolentry}
+\begin{highlights}
+    \item Created a simple command-line task manager using Java, Picocli, and Spring Boot with MongoDB for data storage.
+\end{highlights}
+\end{onecolentry}
+
+\section{Technologies}
+\begin{onecolentry}
+\textbf{Languages \& Frameworks:} Java, Spring Boot, Spring Cloud, JPA, Hibernate
+\end{onecolentry}
+\begin{onecolentry}
+\textbf{Databases \& Caching:} MySQL, PostgreSQL, MongoDB, Redis
+\end{onecolentry}
+\begin{onecolentry}
+\textbf{Messaging \& DevOps:} Kafka, Docker, Kubernetes (Basic), Git
+\end{onecolentry}
+\begin{onecolentry}
+\textbf{Testing:} JUnit, Mockito, Postman
+\end{onecolentry}
+
+\section{Certifications}
+\begin{onecolentry}
+\begin{highlights}
+    \item \textbf{J.P. Morgan Software Engineering Virtual Experience} – Forage (Feb 2024)
+\end{highlights}
+\end{onecolentry}
+
+\section{Leadership \& Activities}
+\begin{onecolentry}
+\begin{highlights}
+    \item \textbf{Led RITU-23 Web Team}, managing project tasks and user interface design.
+    \item Write technical blogs and solve coding challenges on LeetCode.
+\end{highlights}
+\end{onecolentry}
+
+\end{document}
